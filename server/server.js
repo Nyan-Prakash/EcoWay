@@ -4,9 +4,9 @@ const bodyParser = require('body-parser');
 const app = express();
 const port = 9000;
 
-import routeObj from routeObj.js
-import goCalls from goCalls.js
-import hereCalls from hereCalls.js
+const routeObj = require('./routeObj.js')
+const goCalls = require('./goCalls.js')
+const hereCalls = require('./hereCalls.js')
 
 
 let Start_lat;
@@ -19,7 +19,12 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 app.post('/route', (req, res) => {
-    const { origin, destination } = req.body;
+    req.body = (origin, destination) => {
+        Start_lat = origin.lat;
+        Start_long = origin.long;
+        End_lat = destination.lat;
+        End_long = destination.long;
+    };    //const { origin, destination } = req.body;
     console.log(`Starting: ${origin}, Ending: ${destination}`);
     var route = routeObj;
     route.driving.without.route = (origin, destination) => {
