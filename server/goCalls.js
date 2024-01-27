@@ -1,5 +1,7 @@
-//A function that takes two locations as parameters and sends a request to the Google Maps API to get the distance between them
-// write the function here
+
+googKey = process.env.GOOGLE_MAPS_API_KEY
+
+const axios = require('axios');
 const getDistance = (origin, destination) => {
     const url = `https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=${origin}&destinations=${destination}&key=${process.env.GOOGLE_MAPS_API_KEY}`
     return axios.get(url)
@@ -21,11 +23,33 @@ const getOptimisticRouteSep = (startingLatitude, startingLongitude, endingLatitu
         })
 }
 const getOptimisticRoute = (origin, destination) => {
-    const url = `https://maps.googleapis.com/maps/api/directions/json?origin=${origin}&destination=${destination}&traffic_model=optimistic&key=${process.env.GOOGLE_MAPS_API_KEY}`
-    return axios.get(url)
+    const url = `https://routes.googleapis.com/directions/v2:computeRoutes`
+    return axios.post(url, {
+            origin:{
+              location:{
+                latLng:{
+                  latitude: origin.lat,
+                  longitude: origin.long
+                }
+              }
+            },
+            destination:{
+              location:{
+                latLng:{
+                  latitude: destination.lat,
+                  longitude: destination.long
+                }
+              }
+            },
+        },{
+        headers: { 
+            'Content-Type': 'application/json',
+            'X-Goog-Api-Key' : 'AIzaSyBVz2mqxc_sY4fsLefkHaSGNHValpgnaTE',
+            'X-Goog-FieldMask' : ['routes.duration', 'routes.distanceMeters', 'routes.polyline',].join(','),
+        }})
         .then(response => {
-            response.data.routes[0]
-            //return response.data.routes[0].legs[0].steps
+            console.log(response.data);
+            return response.data;
         })
         .catch(error => {
             console.log(error)
@@ -67,3 +91,13 @@ const extraEmissionsByDistance = (route1, route2) => {
 }
 
 //get walking directions if and only if the total distance between origin and destination is less than 2 miles
+
+module.exports = {
+    getDistance,
+    getOptimisticRoute,
+    getTrafficRoute,
+    timeInTraffic,
+    extraEmissionsByTime,
+    extraEmissionsByDistance,
+    getOptimisticRouteSep
+}

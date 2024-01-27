@@ -1,7 +1,7 @@
 var routeObj = {
     'driving': {
         'without': {
-            'route': {},
+            'route': null,
             'distance': 0,
             'emissions': 0,
             'emissionsFactor': 404,

@@ -1,6 +1,7 @@
 id = process.env.HERE_APP_ID
 key = process.env.HERE_API_KEY
 
+const axios = require('axios');
 const getTransitRoute = (origin, destination) => {
     const url = `https://transit.router.hereapi.com/v8/routes?apiKey=${key}&origin=${origin}&destination=${destination}&return=summary`
     return axios.get(url)

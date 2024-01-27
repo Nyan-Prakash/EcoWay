@@ -62,9 +62,8 @@ function App() {
     try {
 
       setShowMap(0); // Show the map after getting the response
-      
-      console.log(lats, ending);
-      const response = await axios.post('http://localhost:9000/route', { 'start_lat': Starting_lat, 'start_long': Starting_long, 'end_lat':Ending_lat, 'end_long':Ending_long });
+
+      const response = await axios.post('http://localhost:5000/route', { 'start_lat': Starting_lat, 'start_long': Starting_long, 'end_lat':Ending_lat, 'end_long':Ending_long });
       console.log(response.data);
     } catch (error) {
       console.error('Error sending POST request:', error);
