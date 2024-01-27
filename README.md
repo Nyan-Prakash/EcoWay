@@ -1,25 +1,9 @@
-# EcoWay
-<html>
-<body style="background-color:rgb(4, 255, 255);">
-<head>
-<style>
-  text-align center
-  title { text-align: center;  } 
-  h1 { text-align: center;  }
-  h4 {  text-align: center; }
-  p  {  text-align: center; }
-</style>
-</head>
-<title>EcoWay Where Is The Song</title>
-<h1>Welcome to EcoWay</h1>
-<h4>Our program uses Google Map API to find the route find the smallest carbon footprint</h4>
-<form action="" method="get">
+The background color is #	#00FFFF
+# Welcome to EcoWay
+*EcoWay Where Is The Song*
 
-  <style>
-    text-align center
-    label { text-align: center;  } 
-    input { text-align: center;  }
-  </style>
+### Our program uses Google Map API to find the route find the smallest carbon footprint</h4>
+<form action="" method="get">
   <label for="Starting Point">Starting Point (Address):</label>
   <input type="text" id="fStarting Point" name="Starting Point"><br><br>
   <label for="End Point">End Point:</label>
@@ -34,23 +18,14 @@
 <img src="Computer.jpg" alt="Computer" width="200" height="200">
 <img src="bus.jpg" alt="bus" width="200" height="200">
 </body>
-</html>
+</html><br> 
 <!--https://www.pinterest.com/pin/360358407663495920//-->
 <!--https://www.dreamstime.com/coach-bus-cartoon-character-mascot-scene-coach-bus-cartoon-character-mascot-road-scene-image107614144/-->
-=============================================================================================================================================================
-<html>
-<body style="background-color:rgb(4, 255, 255);">
-<head>
-<style>
-  text-align center
-  title { text-align: center;  } 
-  h1 { text-align: center;  }
-  h4 {  text-align: center; } 
-  p  {  text-align: center; }
-</style>
-<title>EcoWay Where Is The Song</title>
-<h1>Welcome to EcoWay</h1>
-<h4>Our program uses Google Map API to find the route find the smallest carbon footprint</h4>
+=======================================================================================
+ 
+# Welcome to EcoWay
+*EcoWay Where Is The Song*
+### Our program uses Google Map API to find the route find the smallest carbon footprint</h4>
 <form action="" method="get">
   <label for="Starting Point">Starting Point:</label><br>
   <label for="End Point">End Point:</label><br>
