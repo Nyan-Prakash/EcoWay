@@ -10,7 +10,16 @@ const getDistance = (origin, destination) => {
             console.log(error)
         })
 }
-
+const getOptimisticRouteSep = (startingLatitude, startingLongitude, endingLatitude, endingLongitude) => {
+    const url = `https://maps.googleapis.com/maps/api/directions/json?origin=${startingLatitude},${startingLongitude}&destination=${endingLatitude},${endingLongitude}&traffic_model=optimistic&key=${process.env.GOOGLE_MAPS_API_KEY}`
+    return axios.get(url)
+        .then(response => {
+            return response.data.routes[0].legs[0].steps
+        })
+        .catch(error => {
+            console.log(error)
+        })
+}
 const getOptimisticRoute = (origin, destination) => {
     const url = `https://maps.googleapis.com/maps/api/directions/json?origin=${origin}&destination=${destination}&traffic_model=optimistic&key=${process.env.GOOGLE_MAPS_API_KEY}`
     return axios.get(url)

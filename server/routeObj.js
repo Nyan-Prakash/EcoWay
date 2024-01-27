@@ -1,42 +1,45 @@
 var routeObj = {
     'driving': {
         'without': {
-            'route': null,
-            'distance': null,
-            'emissions': null,
+            'route': {},
+            'distance': 0,
+            'emissions': 0,
             'emissionsFactor': 404,
             'time': 0,
         },
         'with': {
-            'route': null,
-            'distance': null,
-            'emissions': null,
+            'route': {},
+            'distance': 0,
+            'emissions': 0,
             'emissionsFactor': 404,
             'time': 0,
             'idleEmissions': 377,
         }
     },
     'transit': {
-        'route': null,
-        'distance': null,
-        'emissions': null,
+        'route': {},
+        'distance': 0,
+        'emissions': 0,
         'emissionsFactor': 177,
         'time': 0,
-        'departureTime': null,
-        'arrivalTime': null,
+        'departureTime': 0,
+        'arrivalTime': 0,
     },
     'walking': {
-        'route': null,
-        'distance': null,
-        'emissions': null,
+        'route': {},
+        'distance': 0,
+        'emissions': 0,
         'emissionsFactor': 0,
         'time': 0,
     },
     'cycling': {
-        'route': null,
-        'distance': null,
-        'emissions': null,
+        'route': {},
+        'distance': 0,
+        'emissions': 0,
         'emissionsFactor': 0,
         'time': 0,
     }
 }
+
+
+module.exports = routeObj;

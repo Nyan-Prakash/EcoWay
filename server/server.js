@@ -6,74 +6,66 @@ const port = 9000;
 
 const routeObj = require('./routeObj.js')
 const goCalls = require('./goCalls.js')
-const hereCalls = require('./hereCalls.js')
-
-
-let Start_lat;
-let Start_long;
-let End_lat;
-let End_long;
+const hereCalls = require('./hereCalls.js');
+const RouteProps = require('./goType.js');
 
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 app.post('/route', (req, res) => {
-    req.body = (origin, destination) => {
-        Start_lat = origin.lat;
-        Start_long = origin.long;
-        End_lat = destination.lat;
-        End_long = destination.long;
-    };    //const { origin, destination } = req.body;
-    console.log(`Starting: ${origin}, Ending: ${destination}`);
-    var route = routeObj;
-    route.driving.without.route = (origin, destination) => {
-        return goCalls.getOptimisticRoute(origin, destination)
+    RouteProps.origin = { lat: req.body.start_lat, long: req.body.start_long };
+    RouteProps.destination = { lat: req.body.end_lat, long: req.body.end_long };
+
+    console.log(`Starting: ${RouteProps.origin.lat},${RouteProps.origin.long}, Ending: ${RouteProps.destination.lat},${RouteProps.destination.long}`);
+    routeObj.driving.without.route = (origin, destination) => {
+        return goCalls.getOptimisticRoute(RouteProps.origin, RouteProps.destination)
     .then(response => {
-        route.driving.without.distance = response.legs[0].distance.value;
-        route.driving.without.time = response.legs[0].duration.value;
-        route.driving.without.emissions = route.driving.without.distance * route.driving.without.emissionsFactor;
+        routeObj.driving.without.distance = response.legs[0].distance.value;
+        routeObj.driving.without.time = response.legs[0].duration.value;
+        routeObj.driving.without.emissions = routeObj.driving.without.distance * routeObj.driving.without.emissionsFactor;
     }, error => {
         console.log(error);
     })
-    .then(route.driving.with.route = goCalls.getTrafficRoute(origin, destination))
+    .then(routeObj.driving.with.route = goCalls.getTrafficRoute(origin, destination))
     .then(response => {
-        route.driving.with.distance = response.legs[0].distance.value;
-        route.driving.with.time = response.legs[0].duration.value;
-        route.driving.with.emissions = (route.driving.with.distance * route.driving.with.emissionsFactor)+((route.driving.with.time-route.driving.without.time)*route.driving.with.idleEmissions);
+        routeObj.driving.with.distance = response.legs[0].distance.value;
+        routeObj.driving.with.time = response.legs[0].duration.value;
+        routeObj.driving.with.emissions = (routeObj.driving.with.distance * routeObj.driving.with.emissionsFactor)+((routeObj.driving.with.time-routeObj.driving.without.time)*routeObj.driving.with.idleEmissions);
     }, error => {
         console.log(error);
     })
-    .then(route.transit.route = hereCalls.getTransitRoute(origin, destination))
+    .then(routeObj.transit.route = hereCalls.getTransitRoute(origin, destination))
     .then(response => {
-        route.transit.distance = response.legs[0].distance.value;
-        route.transit.time = response.legs[0].duration.value;
-        route.transit.emissions = route.transit.distance * route.transit.emissionsFactor;
-        route.transit.departureTime = response.departure_time.value;
-        route.transit.arrivalTime = response.arrival_time.value;
+        routeObj.transit.distance = response.legs[0].distance.value;
+        routeObj.transit.time = response.legs[0].duration.value;
+        routeObj.transit.emissions = route.transit.distance * route.transit.emissionsFactor;
+        routeObj.transit.departureTime = response.departure_time.value;
+        routeObj.transit.arrivalTime = response.arrival_time.value;
     }, error => {
         console.log(error);
     })
-    .then(route.walking.route = hereCalls.getWalkingRoute(origin, destination))
+    .then(routeObj.walking.route = hereCalls.getWalkingRoute(origin, destination))
     .then(response => {
-        route.walking.distance = response.legs[0].distance.value;
-        route.walking.time = response.legs[0].duration.value;
-        route.walking.emissions = route.walking.distance * route.walking.emissionsFactor;
+        routeObj.walking.distance = response.legs[0].distance.value;
+        routeObj.walking.time = response.legs[0].duration.value;
+        routeObj.walking.emissions = routeObj.walking.distance * routeObj.walking.emissionsFactor;
     }, error => {
         console.log(error);
     })
-    .then(route.cycling.route = hereCalls.getCyclingRoute(origin, destination))
+    .then(routeObj.cycling.route = hereCalls.getCyclingRoute(origin, destination))
     .then(response => {
-        route.cycling.distance = response.legs[0].distance.value;
-        route.cycling.time = response.legs[0].duration.value;
-        route.cycling.emissions = route.cycling.distance * route.cycling.emissionsFactor;
+        routeObj.cycling.distance = response.legs[0].distance.value;
+        routeObj.cycling.time = response.legs[0].duration.value;
+        routeObj.cycling.emissions = routeObj.cycling.distance * routeObj.cycling.emissionsFactor;
     }, error => {   
         console.log(error);
     });
 }
 
     // Process the data as needed and send a response
-    res.send(route);
+    console.log(routeObj);
+    res.send(routeObj);
 });
 
 app.listen(port, () => {
