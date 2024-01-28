@@ -17,7 +17,7 @@ import {
 } from "react-geocode";
 
 function App() {
-  setKey("AIzaSyBVz2mqxc_sY4fsLefkHaSGNHValpgnaTE"); // Replace with your actual API key
+  setKey("AIzaSyChKNFPCFAMU6Pv_aiHHlHao_kXMKi6Zjo"); // Replace with your actual API key
   setLanguage("en");
   setRegion("es");
   
@@ -31,7 +31,7 @@ function App() {
   const [showMap, setShowMap] = useState(1); // New state variable for controlling map visibility
 
   useEffect(() => {
-    fetch("http://localhost:9000/message")
+    fetch("http://localhost:5000/message")
       .then((res) => res.json())
       .then((data) => setMessage(data.message));
   }, []);

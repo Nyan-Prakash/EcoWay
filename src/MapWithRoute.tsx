@@ -42,7 +42,7 @@ const MapWithRoute: React.FC<MapWithRouteProps> = ({ origin, destination }) => {
   }, []);
 
   return (
-    <LoadScript googleMapsApiKey="AIzaSyBVz2mqxc_sY4fsLefkHaSGNHValpgnaTE">
+    <LoadScript googleMapsApiKey="AIzaSyChKNFPCFAMU6Pv_aiHHlHao_kXMKi6Zjo">
       <GoogleMap
         mapContainerStyle={containerStyle}
         center={center}
