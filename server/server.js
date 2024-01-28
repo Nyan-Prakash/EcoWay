@@ -65,10 +65,10 @@ app.post('/route', (req, response) => {
         routeObj.cycling.route = response.routes[0].polyline;
         routeObj.cycling.emissions = routeObj.cycling.distance * routeObj.cycling.emissionsFactor;
     })
-    .then(sendBack = async() => {
-       await delay(5000) ;
-       response.json(routeObj);
-       console.log("Success")
+    .then(() => {
+        response.json(routeObj);
+        //response.send("succ");
+        console.log("Success")
     })
     .catch(error => {
         console.log(error);
