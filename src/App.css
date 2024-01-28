@@ -2,24 +2,52 @@
   text-align: center;
 }
 
+.route-info {
+  margin: 20px;
+  padding: 20px;
+  background: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.route-info h3 {
+  color: #333;
+  text-align: center;
+}
+
 .info-row {
   display: flex;
-  align-items: center; /* Center items vertically */
-  gap: 10px; /* Space between image and text */
-  margin-bottom: 10px; /* Optional: space between rows */
+  align-items: center;
+  margin-bottom: 20px;
 }
 
 .info-row img {
-  height: 100px; /* Adjust as needed */
+  margin-right: 15px;
 }
 
-.route-info p {
-  margin: 0; /* Remove default margin of <p> to tighten the layout */
+.info-row > div {
+  flex: 1;
 }
-.route-info
+
+.titletext
 {
-  padding-left: 25%;
+  font-size: 50pt;
 }
+
+.boss {
+  font-size: 1.2em;
+  color: #444;
+  margin-bottom: 5px;
+}
+
+.infoText {
+  background: #e7e7e7;
+  margin: 5px 0;
+  padding: 10px;
+  border-radius: 4px;
+  color: #555;
+}
+
 
 
 

@@ -63,6 +63,7 @@ app.post('/route', (req, response) => {
     })
     .then(() => {
         response.json(routeObj);
+        //response.send("succ");
         console.log("Success")
     })
     .catch(error => {
