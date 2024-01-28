@@ -27,7 +27,7 @@ app.post('/route', (req, response) => {
 
         routeObj.driving.without.time = response.routes[0].duration;
         withoutTime = routeObj.driving.without.time;
-        routeObj.driving.without.emissions = Number(routeObj.driving.without.time.slice(0,routeObj.driving.without.time.length-1)) * 404;
+        routeObj.driving.without.emissions = (Number(routeObj.driving.without.time.slice(0,routeObj.driving.without.time.length-1)) * 404)/1836;
         routeObj.driving.without.route = response.routes[0].polyline;
     })
     goCalls.getTrafficRoute(origin, destination)
@@ -36,7 +36,7 @@ app.post('/route', (req, response) => {
         routeObj.driving.with.distance = response.routes[0].distanceMeters;
         routeObj.driving.with.time = response.routes[0].duration;
         const withTime = Number(routeObj.driving.with.time.slice(0,routeObj.driving.with.time.length-1))
-        routeObj.driving.with.emissions = (routeObj.driving.with.distance * 404) + ((withTime - withoutTime) * 377);
+        routeObj.driving.with.emissions = ((routeObj.driving.with.distance * 404) + ((withTime - withoutTime) * 377))/1836;
     })
     hereCalls.getTransitRoute(origin.lat,origin.long, destination.lat, destination.long)
     .then(response => {
@@ -44,7 +44,7 @@ app.post('/route', (req, response) => {
         routeObj.transit = {
             'route': null,
             'distance': response.distanceSum,
-            'emissions': response.emissionsSum,
+            'emissions': response.emissionsSum/1836,
             'emissionsFactor': 177,
             'time': response.timeSum,
             'departureTime': response.dtime,
