@@ -3,7 +3,7 @@ import { GoogleMap, LoadScript, DirectionsService, DirectionsRenderer } from '@r
 
 const containerStyle = {
   width: '800px',
-  height: '400px'
+  height: '600px'
 };
 
 const center = {

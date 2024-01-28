@@ -1,0 +1,6 @@
+{showMap === 0 && Starting_lat !== 1 && Starting_long !== 1 && Ending_lat !== 1 && Ending_long !== 1 && (
+            <MapWithRoute
+              origin={{ lat: Starting_lat, lng: Starting_long }}
+              destination={{ lat: Ending_lat, lng: Ending_long }}
+            />
+          )}

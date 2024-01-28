@@ -98,7 +98,7 @@ function App() {
     <div className="App">
       <div className="header">
         <h1 className="titletext">Welcome to EcoWay</h1>
-        <h3>Our program uses Google Maps API to find the route find the smallest carbon footprint!</h3>
+        <h3 style={{color:"green"}}>Our program uses Google Maps API to find the route find the smallest carbon footprint!</h3>
       </div>
       <div className="content">
         <div className="form-container">
@@ -131,7 +131,7 @@ function App() {
                   <div>
                     <p className="infoText">Distance: {(Rdata.driving?.with?.distance/1609).toFixed(2)} miles</p>
                     <p className="infoText">Time: {((Rdata.driving?.with?.time).substring(0, Rdata.driving?.with?.time.length - 1)/60).toFixed(2)} mins</p>
-                    <p className="infoText">Emission: {((Rdata.driving?.with?.distance * 404) + (((((Rdata.driving?.with?.time).substring(0, Rdata.driving?.with?.time.length - 1)/60) - ((Rdata.driving?.without?.time).substring(0, Rdata.driving?.without?.time.length - 1))) * 377)/60)/1000).toFixed(2) }</p>
+                    <p className="infoText">Emission: {(2.28248*(Rdata.driving.with?.distance)/1000).toFixed(2) } cubic meters</p>
                   </div>
                 </div>
                 <div className="info-row">
@@ -140,7 +140,7 @@ function App() {
                   <div>
                     <p className="infoText">Distance: {((Rdata.transit?.distance)/1609).toFixed(2)} miles</p>
                     <p className="infoText">Time: {((Rdata.transit?.time)/60).toFixed(2)} mins</p>
-                    <p className="infoText">Emission:  {Rdata.transit?.emissions.toFixed(2)}</p>
+                    <p className="infoText">Emission:  {Rdata.transit?.emissions.toFixed(2)} cubic</p>
                     <div className="infoText">
                     
                     <Moment format="MMM D YYYY, h:mm a">{(Rdata.transit?.departureTime)}</Moment>
