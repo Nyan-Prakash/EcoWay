@@ -6,7 +6,18 @@ const getTransitRoute = (olat,olong,dlat, dlong) => {
     const url = `https://transit.router.hereapi.com/v8/routes?apiKey=UHT5OnmZHUiiC-l7zWE5QZygiQ8010mvx53M12e0Pxw&origin=${olat},${olong}&destination=${dlat},${dlong}&return=travelSummary`
     return axios.get(url)
         .then(response => {
-            return sumUpSections(response.data.routes[0].sections)
+            if (response.data.routes[0].sections){
+                return sumUpSections(response.data.routes[0].sections)
+            }
+            else{
+                return {
+                    distanceSum: 0,
+                    emissionsSum: 0,
+                    timeSum: 0,
+                    dtime: 0,
+                    atime: 0
+                }
+            }   
         })
         .catch(error => {
             console.log(error)
