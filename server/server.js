@@ -13,6 +13,8 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+let withoutTime = 0;
+
 app.post('/route', (req, response) => {
 
     const origin = { lat: req.body.start_lat, long: req.body.start_long };
@@ -24,7 +26,8 @@ app.post('/route', (req, response) => {
         routeObj.driving.without.distance = response.routes[0].distanceMeters;
 
         routeObj.driving.without.time = response.routes[0].duration;
-        routeObj.driving.without.emissions = routeObj.driving.without.distance * 404;
+        withoutTime = routeObj.driving.without.time;
+        routeObj.driving.without.emissions = Number(routeObj.driving.without.time.slice(0,routeObj.driving.without.time.length-1)) * 404;
         routeObj.driving.without.route = response.routes[0].polyline;
     })
     goCalls.getTrafficRoute(origin, destination)
@@ -32,7 +35,8 @@ app.post('/route', (req, response) => {
         routeObj.driving.with.route = response.routes[0].polyline
         routeObj.driving.with.distance = response.routes[0].distanceMeters;
         routeObj.driving.with.time = response.routes[0].duration;
-        routeObj.driving.with.emissions = (routeObj.driving.with.distance * 404) + ((routeObj.driving.with.time - routeObj.driving.without.time) * 377);
+        const withTime = Number(routeObj.driving.with.time.slice(0,routeObj.driving.with.time.length-1))
+        routeObj.driving.with.emissions = (routeObj.driving.with.distance * 404) + ((withTime - withoutTime) * 377);
     })
     hereCalls.getTransitRoute(origin.lat,origin.long, destination.lat, destination.long)
     .then(response => {
